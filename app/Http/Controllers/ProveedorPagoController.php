@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\ProveedorPago;
-use App\Proveedor;
+use App\Models\ProveedorPago;
+use App\Models\Proveedor;
 
 class ProveedorPagoController extends Controller
 {
