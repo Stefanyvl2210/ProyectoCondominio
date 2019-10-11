@@ -15,10 +15,8 @@ class CreateTableInmuebles extends Migration
     {
         Schema::create('inmuebles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('tipo');
+            $table->string('tipo');
             $table->decimal('alicuota');
-            $table->decimal('monto_reserva');
-            $table->decimal('pago');
             $table->timestamps();
         });
     }

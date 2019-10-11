@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Inmueble;
+use App\Models\Inmueble;
 use Illuminate\Http\Request;
 
 class InmuebleController extends Controller
@@ -14,8 +14,8 @@ class InmuebleController extends Controller
      */
     public function index()
     {
-        return view('reporteInmuebles.index', [
-          'reporteInmuebles' => Inmueble::all()
+        return view('inmueble.index', [
+            'inmuebles' => Inmueble::all()
         ]);
     }
 
@@ -26,108 +26,69 @@ class InmuebleController extends Controller
      */
     public function create()
     {
-        return view('reporteInmuebles.create');
+        return view('inmueble.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $validData = $request->validate([
-          'alicuota' => 'required|numeric',
-          'monto_reserva' => 'required|numeric',
-          'pago' => 'required|numeric'
+            'tipo'=> 'required',
+            'alicuota' => 'required|numeric',
         ]);
 
-        $reporte = new Inmueble();
-        $reporte->tipo = $request->get('tipo');
-        $reporte->alicuota = $validData['alicuota'];
-        $reporte->monto_reserva = $validData['monto_reserva'];
-        $reporte->pago = $validData['pago'];
-        $reporte->save();
+        Inmueble::create($request->all());
 
-        return redirect('/reporte_inmuebles');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $reporte = Inmueble::findOrFail($id);
-        $mes = ['Enero',
-                'Febrero',
-                'Marzo',
-                'Abril',
-                'Mayo',
-                'Junio',
-                'Julio',
-                'Agosto',
-                'Septiembre',
-                'Octubre',
-                'Noviembre',
-                'Diciembre'];
-        return view('reporteInmuebles.show', [
-          'reporte' => $reporte,
-          'meses' => $mes
-        ]);
+        return redirect()->route('inmueble.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $reporte = Inmueble::findOrFail($id);
-        return view('reporteInmuebles.edit', [
-          'reporte' => $reporte
+        return view('inmueble.edit', [
+            'inmueble' => Inmueble::findOrFail($id)
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $validData = $request->validate([
-          'alicuota' => 'required|numeric',
-          'monto_reserva' => 'required|numeric',
-          'pago' => 'required|numeric'
+            'tipo'=> 'required',
         ]);
-        $reporte = Inmueble::findOrFail($id);
-        $reporte->tipo = $request->get('tipo');
-        $reporte->alicuota = $validData['alicuota'];
-        $reporte->monto_reserva = $validData['monto_reserva'];
-        $reporte->pago = $validData['pago'];
-        $reporte->save();
-        return redirect('/reporte_inmuebles');
+        Inmueble::findOrFail($id)
+            ->update($request->all());
+
+        return redirect()->route('inmueble.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Inmueble $inmueble
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Inmueble $inmueble)
     {
-        $reporte = Inmueble::findOrFail($id);
-        $reporte->delete();
-        return redirect('/reporte_inmuebles');
+        $inmueble->delete();
+        return redirect()->route('inmueble.index');
     }
 
 }

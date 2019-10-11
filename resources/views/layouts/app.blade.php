@@ -16,6 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -31,34 +32,22 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item dropdown">
-                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                              Reportes de inmuebles
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Imuebles
                           </a>
                           <div class="dropdown-menu dropdown-menu-left">
-                              <a class="dropdown-item" href="/reporte_inmuebles">- Lista de inmuebles</a>
-                              <a class="dropdown-item" href="#">- Estado de cuentas</a>
-                              <a class="dropdown-item" href="#">- Historico de cuentas</a>
-                              <a class="dropdown-item" href="#">- Cobros del mes</a>
-                              <a class="dropdown-item" href="#">- Analisis de vencimiento</a>
-                              <a class="dropdown-item" href="#">- Cartelera</a>
-                              <a class="dropdown-item" href="#">- Cuentas por cobrar</a>
+                              <a class="dropdown-item" href="{{route('inmueble.index')}}">- Lista de inmuebles</a>
+{{--                              <a class="dropdown-item" href="#">- Estado de cuentas</a>--}}
+{{--                              <a class="dropdown-item" href="#">- Historico de cuentas</a>--}}
+{{--                              <a class="dropdown-item" href="#">- Cobros del mes</a>--}}
+{{--                              <a class="dropdown-item" href="#">- Analisis de vencimiento</a>--}}
+{{--                              <a class="dropdown-item" href="#">- Cartelera</a>--}}
+{{--                              <a class="dropdown-item" href="#">- Cuentas por cobrar</a>--}}
                           </div>
-                      </li>
-                      <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Reportes de proveedores
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-left">
-                            <a class="dropdown-item" href="/reporte_proveedores">- Lista de proveedores</a>
-                            <a class="dropdown-item" href="#">- Estado de cuentas</a>
-                            <a class="dropdown-item" href="#">- Historico de cuentas</a>
-                            <a class="dropdown-item" href="#">- Pagos del mes</a>
-                            <a class="dropdown-item" href="#">- Facturas pendientes</a>
-                        </div>
                       </li>
                     </ul>
 
@@ -76,7 +65,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -102,7 +91,9 @@
             @yield('content')
         </main>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     @yield('scripts')
 </body>
 </html>
